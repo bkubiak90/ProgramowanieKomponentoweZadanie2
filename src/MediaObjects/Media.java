@@ -1,6 +1,6 @@
 package MediaObjects;
 
-public class Media implements Comparable {
+public class Media {
 
     private String title;
     private String genre;
@@ -35,8 +35,4 @@ public class Media implements Comparable {
                 ", genre='" + genre + '\'';
     }
 
-    @Override
-    public int compareTo(Object o) {
-        return 0;
-    }
 }

@@ -16,8 +16,6 @@ public class Main {
         start(medias);
 
 
-
-
     }
 
     public static void init(Media[] medias) {
@@ -36,7 +34,8 @@ public class Main {
 
         do {
             System.out.println(
-                    "\n" +
+                            "\n" +
+                            "========\n" +
                             "1.Add \n" +
                             "2.Print \n" +
                             "3.Sort \n" +
@@ -45,14 +44,13 @@ public class Main {
 
             switch (scanner.nextInt()) {
                 case 1:
+                    if (index < medias.length) {
                     System.out.println(
-                            "\n" +
                                     "1.Movie \n" +
                                     "2.Book"
                     );
                     int choice = scanner.nextInt();
 
-                    if (index < medias.length) {
                         if (choice == 1) {
                             scanner.nextLine();
                             System.out.print("Title: ");
@@ -65,8 +63,13 @@ public class Main {
                             String length = scanner.nextLine();
                             System.out.print("Release Date: ");
                             String releaseDate = scanner.nextLine();
-                            medias[index] = new Movie(title, genre, director,releaseDate, length);
-                            index++;
+                            for (int i = 0; i < 10; i++) {
+                                if (null == medias[i]) {
+                                    medias[i] = new Movie(title, genre, director, releaseDate, length);
+                                    i = 10;
+                                    index++;
+                                }
+                            }
                         } else if (choice == 2) {
                             scanner.nextLine();
                             System.out.print("Title: ");
@@ -79,10 +82,15 @@ public class Main {
                             String pages = scanner.nextLine();
                             System.out.print("Publication Date: ");
                             String publicationDate = scanner.nextLine();
-                            medias[index] = new Book(title, genre, author, publicationDate, pages);
-                            index++;
+                            for (int i = 0; i < 10; i++) {
+                                if (null == medias[i]) {
+                                    medias[i] = new Book(title, genre, author, publicationDate, pages);
+                                    i = 10;
+                                    index++;
+                                }
+                            }
                         }
-                        } else {
+                    } else {
                             System.out.println("No space available to add new record");
                     }
                     break;
@@ -95,14 +103,14 @@ public class Main {
                     break;
                 case 3:
                     System.out.println(
-                            "1.byTitle \n" +
+                                    "1.byTitle \n" +
                                     "2.byGenre \n" +
                                     "3.byAuthor \n" +
                                     "4.byReleaseDate \n" +
                                     "5.byLength"
                     );
 
-                    choice = scanner.nextInt();
+                    int choice = scanner.nextInt();
                     scanner.nextLine();
 
                     if (choice == 1) {
@@ -124,8 +132,6 @@ public class Main {
                     System.out.println("Wrong choice, pick other");
                     break;
             }
-
-
         } while (!quit);
     }
 }

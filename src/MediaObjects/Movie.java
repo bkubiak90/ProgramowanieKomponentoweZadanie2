@@ -1,5 +1,7 @@
 package MediaObjects;
 
+import java.util.Objects;
+
 public class Movie extends Media implements Comparable {
 
     private String director;
@@ -52,7 +54,25 @@ public class Movie extends Media implements Comparable {
 
     @Override
     public String toString() {
-        return String.format("%-8sTitle: %-35sDirector: %-20sGenre: %-27sReleaseDate: %-13sRunningTime: %-10s", "Movie", getTitle(), director, getGenre(), releaseDate, runningTime);
+        return String.format("%-8sTitle: %-35sDirector: %-20sGenre: %-27sReleaseDate: %-13sRunningTime: %-10s", "Movie",
+                getTitle(), director, getGenre(), releaseDate, runningTime);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Movie)) return false;
+        Movie movie = (Movie) o;
+        return Objects.equals(getDirector(), movie.getDirector()) &&
+                Objects.equals(getReleaseDate(), movie.getReleaseDate()) &&
+                Objects.equals(getRunningTime(), movie.getRunningTime()) &&
+                Objects.equals(super.getTitle(), movie.getTitle()) &&
+                Objects.equals(super.getGenre(), movie.getGenre());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDirector(), getReleaseDate(), getRunningTime(), super.getTitle(), super.getGenre());
     }
 
     @Override

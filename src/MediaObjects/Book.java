@@ -1,5 +1,7 @@
 package MediaObjects;
 
+import java.util.Objects;
+
 public class Book extends Media implements Comparable {
 
     private String author;
@@ -51,7 +53,25 @@ public class Book extends Media implements Comparable {
 
     @Override
     public String toString() {
-        return String.format("%-8sTitle: %-35sAuthor: %-22sGenre: %-27sPubicationDate: %-10sPages: %-10s", "Book", getTitle(), author, getGenre(), publicationDate, pages);
+        return String.format("%-8sTitle: %-35sAuthor: %-22sGenre: %-27sPubicationDate: %-10sPages: %-10s", "Book",
+                getTitle(), author, getGenre(), publicationDate, pages);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book)) return false;
+        Book book = (Book) o;
+        return Objects.equals(getAuthor(), book.getAuthor()) &&
+                Objects.equals(getPublicationDate(), book.getPublicationDate()) &&
+                Objects.equals(getPages(), book.getPages()) &&
+                Objects.equals(super.getTitle(), book.getTitle()) &&
+                Objects.equals(super.getGenre(), book.getGenre());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getAuthor(), getPublicationDate(), getPages(), super.getTitle(), super.getGenre());
     }
 
     @Override
