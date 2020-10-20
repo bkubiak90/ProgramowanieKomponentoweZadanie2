@@ -13,13 +13,30 @@ public class Main {
 
         Media[] medias = new Media[10];
         init(medias);
-        int index = 6;
+        start(medias);
 
+
+
+
+    }
+
+    public static void init(Media[] medias) {
+        medias[0] = new Book("The Unknown Kimi Raikkonen", "Biography", "Kari Hotakainen", "2018", "336");
+        medias[1] = new Book("The Green Mile", "Novel", "Stephen King", "1996", "416");
+        medias[2] = new Book("The Alchemist", "Novel", "Paulo Coelho", "1988", "163");
+        medias[3] = new Movie("Star Wars: Return of the Jedi", "Science fiction", "Richard Marquand", "1983", "132");
+        medias[4] = new Movie("Green Book", "Biographical comedy-drama", "Peter Farrelly", "2018", "130");
+        medias[5] = new Movie("The Hobbit: An Unexpected Journey", "Fantasy", "Peter Jackson", "2012", "169");
+    }
+
+    public static void start(Media[] medias) {
         Scanner scanner = new Scanner(System.in);
+        int index = 6;
         boolean quit = false;
+
         do {
             System.out.println(
-                            "\n" +
+                    "\n" +
                             "1.Add \n" +
                             "2.Print \n" +
                             "3.Sort \n" +
@@ -29,7 +46,7 @@ public class Main {
             switch (scanner.nextInt()) {
                 case 1:
                     System.out.println(
-                                    "\n" +
+                            "\n" +
                                     "1.Movie \n" +
                                     "2.Book"
                     );
@@ -49,6 +66,7 @@ public class Main {
                             System.out.print("Release Date: ");
                             String releaseDate = scanner.nextLine();
                             medias[index] = new Movie(title, genre, director,releaseDate, length);
+                            index++;
                         } else if (choice == 2) {
                             scanner.nextLine();
                             System.out.print("Title: ");
@@ -62,9 +80,12 @@ public class Main {
                             System.out.print("Publication Date: ");
                             String publicationDate = scanner.nextLine();
                             medias[index] = new Book(title, genre, author, publicationDate, pages);
+                            index++;
                         }
-                        break;
+                        } else {
+                            System.out.println("No space available to add new record");
                     }
+                    break;
                 case 2:
                     for (Media m : medias) {
                         if (null != m) {
@@ -74,11 +95,11 @@ public class Main {
                     break;
                 case 3:
                     System.out.println(
-                                "1.byTitle \n" +
-                                "2.byGenre \n" +
-                                "3.byAuthor \n" +
-                                "4.byReleaseDate \n" +
-                                "5.byLength"
+                            "1.byTitle \n" +
+                                    "2.byGenre \n" +
+                                    "3.byAuthor \n" +
+                                    "4.byReleaseDate \n" +
+                                    "5.byLength"
                     );
 
                     choice = scanner.nextInt();
@@ -106,19 +127,5 @@ public class Main {
 
 
         } while (!quit);
-    }
-
-    public static void init(Media[] o) {
-        Media[] m = (Media[]) o;
-        if (null == m) {
-            m = new Media[10];
-        }
-
-        m[0] = new Book("The Unknown Kimi Raikkonen", "Biography", "Kari Hotakainen", "2018", "336");
-        m[1] = new Book("The Green Mile", "Novel", "Stephen King", "1996", "416");
-        m[2] = new Book("The Alchemist", "Novel", "Paulo Coelho", "1988", "163");
-        m[3] = new Movie("Star Wars: Return of the Jedi", "Science fiction", "Richard Marquand", "1983", "132");
-        m[4] = new Movie("Green Book", "Biographical comedy-drama", "Peter Farrelly", "2018", "130");
-        m[5] = new Movie("The Hobbit: An Unexpected Journey", "Fantasy", "Peter Jackson", "2012", "169");
     }
 }

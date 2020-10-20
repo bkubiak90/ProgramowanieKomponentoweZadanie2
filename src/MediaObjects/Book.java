@@ -16,6 +16,14 @@ public class Book extends Media implements Comparable {
         this.publicationDate = publicationDate;
     }
 
+    public Book(Movie movie) {
+        super.setTitle(movie.getTitle());
+        super.setGenre(movie.getGenre());
+        this.author = movie.getDirector();
+        this.publicationDate = movie.getReleaseDate();
+        this.pages = movie.getRunningTime();
+    }
+
     public String getAuthor() {
         return author;
     }
@@ -43,17 +51,15 @@ public class Book extends Media implements Comparable {
 
     @Override
     public String toString() {
-        return "Book { " +
-                super.toString() +
-                ", author='" + author + '\'' +
-                ", publicationDate='" + publicationDate + '\'' +
-                ", pages='" + pages + '\'' +
-                '}';
+        return String.format("%-8sTitle: %-35sAuthor: %-22sGenre: %-27sPubicationDate: %-10sPages: %-10s", "Book", getTitle(), author, getGenre(), publicationDate, pages);
     }
 
     @Override
     public int compareTo(Object o) {
-
-        return 0;
+        if (o.getClass() == this.getClass()) {
+            Book book = (Book) o;
+            return this.toString().compareToIgnoreCase(book.toString());
+        }
+        return -1;
     }
 }
